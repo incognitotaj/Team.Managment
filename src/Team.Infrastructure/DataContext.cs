@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Team.Domain.Common;
 using Team.Domain.Entities;
 using Team.Infrastructure.Configurations;
 
@@ -32,6 +33,31 @@ namespace Team.Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries<EntityBase>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Detached:
+                        break;
+                    case EntityState.Unchanged:
+                        break;
+                    case EntityState.Deleted:
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.UpdatedOn = DateTime.UtcNow;
+                        break;
+                    case EntityState.Added:
+                        entry.Entity.CreatedOn = DateTime.UtcNow; 
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectClient> ProjectClients { get; set; }

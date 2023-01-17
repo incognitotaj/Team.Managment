@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using System.Reflection;
 using Team.Application;
 using Team.Infrastructure;
 
@@ -39,6 +41,11 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://www.datumsquare.com/")
         }
     });
+
+    // using System.Reflection;
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {
         Name = "Authorization",
@@ -59,10 +66,10 @@ builder.Services.AddSwaggerGen(options =>
                         new string[] {}
                     }
     });
-
 });
 
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices();
 
 var app = builder.Build();
 
@@ -91,6 +98,7 @@ if (app.Environment.IsDevelopment())
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Team Management API v1");
         options.RoutePrefix = string.Empty;
+        options.DocExpansion(DocExpansion.None);
     });
 }
 

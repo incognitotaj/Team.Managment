@@ -8,6 +8,7 @@ namespace Team.Application.Dtos
 {
     public class ProjectDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Detail { get; set; }
         public DateTime StartDate { get; set; }
