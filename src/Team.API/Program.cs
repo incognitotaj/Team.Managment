@@ -1,9 +1,21 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Team.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var config = builder.Configuration;
 
+builder.Services.AddDbContext<DataContext>(
+    x => x.UseSqlServer(
+        config.GetConnectionString("TeamConnection"),
+        options =>
+        {
+            options.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+        }
+    )
+);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

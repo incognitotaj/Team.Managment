@@ -9,19 +9,21 @@ namespace Team.Domain.Entities
 {
     public class Resource : EntityBase
     {
-        public Resource(string name, string email, string phone)
+        public Resource(string firstName, string lastName, string email, string phone)
         {
-            Name = name;
+            FirstName = firstName;
+            LastName = lastName;
             Email = email;
             Phone = phone;
 
-            ProjectResource = new HashSet<ProjectResource>();
+            ProjectResources = new HashSet<ProjectResource>();
         }
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public virtual ICollection<ProjectResource> ProjectResource { get; set; }
+        public virtual ICollection<ProjectResource> ProjectResources { get; set; }
 
     }
 }

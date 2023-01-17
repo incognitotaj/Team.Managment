@@ -9,9 +9,10 @@ namespace Team.Domain.Entities
 {
     public class Project : EntityBase
     {
-        public Project(string name, DateTime startDate, DateTime endDate)
+        public Project(string name, string detail, DateTime startDate, DateTime endDate)
         {
             Name = name;
+            Detail = detail;
             StartDate = startDate;
             EndDate = endDate;
 
@@ -22,6 +23,7 @@ namespace Team.Domain.Entities
         }
 
         public string Name { get; set; }
+        public string Detail { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
