@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Team.Application.Dtos;
+using Team.Application.Features.ProjectClients.Commands.CreateProjectClient;
+using Team.Application.Features.ProjectClients.Commands.UpdateProjectClient;
 using Team.Application.Features.Projects.Commands.CreateProject;
 using Team.Application.Features.Projects.Commands.UpdateProject;
+using Team.Application.Features.Resources.Commands.CreateResource;
+using Team.Application.Features.Resources.Commands.UpdateResource;
 using Team.Domain.Entities;
 
 namespace Team.Application.Mappings
@@ -19,6 +18,15 @@ namespace Team.Application.Mappings
 
             CreateMap<Project, CreateProjectCommand>().ReverseMap();
             CreateMap<Project, UpdateProjectCommand>().ReverseMap();
+
+
+            CreateMap<ProjectClient, ProjectClientDto>().ReverseMap();
+            CreateMap<ProjectClient, CreateProjectClientCommand>().ReverseMap();
+            CreateMap<ProjectClient, UpdateProjectClientCommand>().ReverseMap();
+
+            CreateMap<Resource, ResourceDto>().ReverseMap();
+            CreateMap<Resource, CreateResourceCommand>().ReverseMap();
+            CreateMap<Resource, UpdateResourceCommand>().ReverseMap();
         }
     }
 }

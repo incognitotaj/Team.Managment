@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Team.Application.Contracts.Persistence;
 using Team.Application.Dtos;
 using Team.Application.Exceptions;
-using Team.Application.Features.Projects.Commands.UpdateProject;
 using Team.Domain.Entities;
 
 namespace Team.Application.Features.Projects.Queries.GetProjectById

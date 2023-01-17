@@ -79,7 +79,7 @@ namespace Team.API.Controllers
         public async Task<ActionResult<IEnumerable<ProjectDto>>> Create([FromBody] CreateProjectCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok();
+            return Ok(result);
         }
 
         /// <summary>
