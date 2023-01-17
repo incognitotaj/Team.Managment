@@ -5,13 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B9E819A0-505F-4E54-9AB4-E94BA49876D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Team.API", "src\Team.API\Team.API.csproj", "{23BB8BD8-4203-4707-9540-4C52E9557500}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Team.API", "src\Team.API\Team.API.csproj", "{23BB8BD8-4203-4707-9540-4C52E9557500}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Team.Domain", "src\Team.Domain\Team.Domain.csproj", "{65EF11CA-AC59-4507-80C1-28604AFD1183}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Team.Application", "src\Team.Application\Team.Application.csproj", "{C195D4EC-14E0-4A8B-91A1-79B820F8313B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Team.Application", "src\Team.Application\Team.Application.csproj", "{C195D4EC-14E0-4A8B-91A1-79B820F8313B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Team.Infrastructure", "src\Team.Infrastructure\Team.Infrastructure.csproj", "{6F684EA7-30EB-4F63-9AF1-66785CBC5C32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Team.Infrastructure", "src\Team.Infrastructure\Team.Infrastructure.csproj", "{6F684EA7-30EB-4F63-9AF1-66785CBC5C32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
