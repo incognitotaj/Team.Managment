@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Team.Application;
 using Team.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,8 +62,26 @@ builder.Services.AddSwaggerGen(options =>
 
 });
 
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateAsyncScope();
+var services = scope.ServiceProvider;
+var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+
+try
+{
+
+    var context = services.GetRequiredService<DataContext>();
+    await context.Database.MigrateAsync();
+    //await DataSeeder.SeedAsync(context, loggerFactory);
+}
+catch (Exception ex)
+{
+    var logger = loggerFactory.CreateLogger<Program>();
+    logger.LogError(ex.Message);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

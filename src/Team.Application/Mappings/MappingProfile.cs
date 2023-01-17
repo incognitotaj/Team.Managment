@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team.Application.Dtos;
+using Team.Application.Features.Projects.Commands.CreateProject;
+using Team.Application.Features.Projects.Commands.UpdateProject;
 using Team.Domain.Entities;
 
 namespace Team.Application.Mappings
@@ -13,7 +15,10 @@ namespace Team.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Project, ProjectDto>();
+            CreateMap<Project, ProjectDto>().ReverseMap();
+
+            CreateMap<Project, CreateProjectCommand>().ReverseMap();
+            CreateMap<Project, UpdateProjectCommand>().ReverseMap();
         }
     }
 }
