@@ -9,7 +9,7 @@ namespace Team.Domain.Entities
 {
     public class ProjectMilestone : EntityBase
     {
-        public ProjectMilestone(int projectId, string title, string detail, DateTime fromDate, DateTime? toDate)
+        public ProjectMilestone(Guid projectId, string title, string detail, DateTime fromDate, DateTime? toDate)
         {
             ProjectId = projectId;
             Title = title;
@@ -18,7 +18,7 @@ namespace Team.Domain.Entities
             ToDate = toDate;
         }
 
-        public int ProjectId { get; set; }
+        public Guid ProjectId { get; set; }
         public virtual Project Project { get; set; }
         public string Title { get; set; }
         public string Detail { get; set; }

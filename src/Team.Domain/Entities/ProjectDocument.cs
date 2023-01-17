@@ -9,7 +9,7 @@ namespace Team.Domain.Entities
 {
     public class ProjectDocument : EntityBase
     {
-        public ProjectDocument(string title, string url, string detail, int projectId)
+        public ProjectDocument(string title, string url, string detail, Guid projectId)
         {
             Title = title;
             Url = url;
@@ -20,7 +20,7 @@ namespace Team.Domain.Entities
         public string Title { get; set; }
         public string Url { get; set; }
         public string Detail { get; set; }
-        public int ProjectId { get; set; }
+        public Guid ProjectId { get; set; }
         public virtual Project Project { get; set; }
     }
 }

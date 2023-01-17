@@ -40,6 +40,11 @@ namespace Team.Infrastructure.Configurations
                 .IsRequired(false)
                 .HasColumnType("DATETIME");
 
+            builder.Property(x => x.CreatedOn)
+               .IsRequired()
+               .HasColumnType("DATETIME")
+               .HasDefaultValueSql("GETDATE()");
+
             builder.HasOne(x => x.Project)
                 .WithMany(x => x.ProjectMilestones)
                 .HasForeignKey(x => x.ProjectId)

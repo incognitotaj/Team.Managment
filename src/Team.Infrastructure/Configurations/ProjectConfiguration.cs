@@ -36,6 +36,11 @@ namespace Team.Infrastructure.Configurations
             builder.Property(x => x.EndDate)
                 .IsRequired()
                 .HasColumnType("DATE");
+
+            builder.Property(x => x.CreatedOn)
+               .IsRequired()
+               .HasColumnType("DATETIME")
+               .HasDefaultValueSql("GETDATE()");
         }
     }
 }

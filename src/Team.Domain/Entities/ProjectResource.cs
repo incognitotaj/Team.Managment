@@ -9,7 +9,7 @@ namespace Team.Domain.Entities
 {
     public class ProjectResource : EntityBase
     {
-        public ProjectResource(int projectId, int resourceId, DateTime fromDate, DateTime? toDate)
+        public ProjectResource(Guid projectId, Guid resourceId, DateTime fromDate, DateTime? toDate)
         {
             ProjectId = projectId;
             ResourceId = resourceId;
@@ -17,9 +17,9 @@ namespace Team.Domain.Entities
             ToDate = toDate;
         }
 
-        public int ProjectId { get; set; }
+        public Guid ProjectId { get; set; }
         public virtual Project Project { get; set; }
-        public int ResourceId { get; set; } 
+        public Guid ResourceId { get; set; } 
         public virtual Resource Resource { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime? ToDate { get; set; }

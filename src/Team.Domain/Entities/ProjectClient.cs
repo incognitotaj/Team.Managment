@@ -9,7 +9,7 @@ namespace Team.Domain.Entities
 {
     public class ProjectClient : EntityBase
     {
-        public ProjectClient(int projectId, string name, string email, string phone)
+        public ProjectClient(Guid projectId, string name, string email, string phone)
         {
             ProjectId = projectId;
             Name = name;
@@ -17,7 +17,7 @@ namespace Team.Domain.Entities
             Phone = phone;
         }
 
-        public int ProjectId { get; set; }
+        public Guid ProjectId { get; set; }
         public virtual Project Project { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }

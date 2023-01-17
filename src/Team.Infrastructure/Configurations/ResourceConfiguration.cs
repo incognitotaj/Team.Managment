@@ -36,6 +36,11 @@ namespace Team.Infrastructure.Configurations
             builder.Property(x => x.Phone)
                 .IsRequired(false)
                 .HasColumnType("NVARCHAR(30)");
+
+            builder.Property(x => x.CreatedOn)
+               .IsRequired()
+               .HasColumnType("DATETIME")
+               .HasDefaultValueSql("GETDATE()");
         }
     }
 }

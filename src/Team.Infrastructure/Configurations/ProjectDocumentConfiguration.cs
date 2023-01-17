@@ -36,6 +36,11 @@ namespace Team.Infrastructure.Configurations
                .IsRequired()
                .HasColumnType("NVARCHAR(500)");
 
+            builder.Property(x => x.CreatedOn)
+               .IsRequired()
+               .HasColumnType("DATETIME")
+               .HasDefaultValueSql("GETDATE()");
+
             builder.HasOne(x => x.Project)
                 .WithMany(x => x.ProjectDocuments)
                 .HasForeignKey(x => x.ProjectId)
