@@ -10,8 +10,13 @@ namespace Team.Infrastructure
         {
             services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
 
+            services.AddScoped<IResourceRepository, ResourceRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectClientRepository, ProjectClientRepository>();
+            services.AddScoped<IProjectMilestoneRepository, ProjectMilestoneRepository>();
+            services.AddScoped<IProjectDocumentRepository, ProjectDocumentRepository>();
+            services.AddScoped<IProjectResourceRepository, ProjectResourceRepository>();
+
             return services;
         }
     }

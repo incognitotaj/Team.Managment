@@ -4,7 +4,7 @@ namespace Team.Application.Contracts.Persistence
 {
     public interface IProjectClientRepository : IAsyncRepository<ProjectClient>
     {
-        // Get Projects By User
+        // Get Clients by ProjectId
         Task<IEnumerable<ProjectClient>> GetByProjectIdAsync(Guid projectId);
     }
 }

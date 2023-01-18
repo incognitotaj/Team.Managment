@@ -76,7 +76,7 @@ namespace Team.API.Controllers
         /// <returns></returns>
         [HttpPost()]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<ActionResult<IEnumerable<ProjectDto>>> Create([FromBody] CreateProjectCommand command)
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateProjectCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
@@ -90,7 +90,7 @@ namespace Team.API.Controllers
         [HttpPut()]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IEnumerable<ProjectDto>>> Update([FromBody] UpdateProjectCommand command)
+        public async Task<ActionResult> Update([FromBody] UpdateProjectCommand command)
         {
             await _mediator.Send(command);
             return NoContent();
@@ -104,7 +104,7 @@ namespace Team.API.Controllers
         [HttpDelete("{projectId}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IEnumerable<ProjectDto>>> Delete(string projectId)
+        public async Task<ActionResult> Delete(string projectId)
         {
             var command = new DeleteProjectCommand()
             {
