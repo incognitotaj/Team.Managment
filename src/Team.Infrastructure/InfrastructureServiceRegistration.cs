@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Team.Application.Contracts.Persistence;
 using Team.Application.Contracts.Services;
+using Team.Domain.Entities.Identity;
+using Team.Infrastructure.Identity;
 using Team.Infrastructure.Repositories;
 using Team.Infrastructure.Services;
 
@@ -21,6 +24,27 @@ namespace Team.Infrastructure
 
 
             services.AddTransient<IFileUploadOnServerService, FileUploadOnServerService>();
+
+
+            var builder = services.AddIdentityCore<AppUser>();
+            builder = new IdentityBuilder(builder.UserType, builder.Services);
+            builder.AddEntityFrameworkStores<AppIdentityDbContext>();
+            builder.AddSignInManager<SignInManager<AppUser>>();
+
+            services.AddAuthentication();
+
+            return services;
+        }
+
+
+        public static IServiceCollection AddIdentityServices(this IServiceCollection services)
+        {
+            var builder = services.AddIdentityCore<AppUser>();
+            builder = new IdentityBuilder(builder.UserType, builder.Services);
+            builder.AddEntityFrameworkStores<AppIdentityDbContext>();
+            builder.AddSignInManager<SignInManager<AppUser>>();
+
+            services.AddAuthentication();
 
             return services;
         }

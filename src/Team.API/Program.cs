@@ -1,11 +1,14 @@
 using AutoWrapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 using Team.Application;
 using Team.Application.Responses;
+using Team.Domain.Entities.Identity;
 using Team.Infrastructure;
+using Team.Infrastructure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,10 +20,21 @@ builder.Services.AddDbContext<DataContext>(
         config.GetConnectionString("TeamConnection"),
         options =>
         {
-            options.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+            //options.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
         }
     )
 );
+
+builder.Services.AddDbContext<AppIdentityDbContext>(
+    x => x.UseSqlServer(
+        config.GetConnectionString("IdentityConnection"),
+        options =>
+        {
+            //options.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+        }
+    )
+);
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -72,6 +86,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
+builder.Services.AddIdentityServices();
 
 var app = builder.Build();
 
@@ -84,7 +99,12 @@ try
 
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
-    //await DataSeeder.SeedAsync(context, loggerFactory);
+
+    var contextIdentity = services.GetRequiredService<AppIdentityDbContext>();
+    await contextIdentity.Database.MigrateAsync();
+
+    var userManager = scope.ServiceProvider.GetService<UserManager<AppUser>>();
+    await IdentityDataSeeder.SeedAsync(userManager);
 }
 catch (Exception ex)
 {
