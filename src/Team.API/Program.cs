@@ -1,8 +1,10 @@
+using AutoWrapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 using Team.Application;
+using Team.Application.Responses;
 using Team.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -104,8 +106,18 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseApiResponseAndExceptionWrapper<MapApiResponse>(new AutoWrapperOptions
+{
+    IgnoreNullValue = false,
+    ShowApiVersion = true,
+    ShowStatusCode = true,
+    ShowIsErrorFlagForSuccessfulResponse = true,
+});
 
 app.Run();

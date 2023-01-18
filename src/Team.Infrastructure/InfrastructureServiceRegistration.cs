@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Team.Application.Contracts.Persistence;
+using Team.Application.Contracts.Services;
 using Team.Infrastructure.Repositories;
+using Team.Infrastructure.Services;
 
 namespace Team.Infrastructure
 {
@@ -16,6 +18,9 @@ namespace Team.Infrastructure
             services.AddScoped<IProjectMilestoneRepository, ProjectMilestoneRepository>();
             services.AddScoped<IProjectDocumentRepository, ProjectDocumentRepository>();
             services.AddScoped<IProjectResourceRepository, ProjectResourceRepository>();
+
+
+            services.AddTransient<IFileUploadOnServerService, FileUploadOnServerService>();
 
             return services;
         }

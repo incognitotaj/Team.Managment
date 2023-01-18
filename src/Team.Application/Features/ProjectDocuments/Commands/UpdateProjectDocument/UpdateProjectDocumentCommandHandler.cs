@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Team.Application.Contracts.Persistence;
+using Team.Application.Contracts.Services;
 using Team.Application.Exceptions;
 using Team.Domain.Entities;
 
@@ -13,13 +14,20 @@ namespace Team.Application.Features.ProjectDocuments.Commands.UpdateProjectDocum
         private readonly IProjectDocumentRepository _projectDocumentRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateProjectDocumentCommandHandler> _logger;
+        private readonly IFileUploadOnServerService _fileUploadOnServerService;
 
-        public UpdateProjectDocumentCommandHandler(IProjectRepository projectRepository, IProjectDocumentRepository projectDocumentRepository, IMapper mapper, ILogger<UpdateProjectDocumentCommandHandler> logger)
+        public UpdateProjectDocumentCommandHandler(
+            IProjectRepository projectRepository, 
+            IProjectDocumentRepository projectDocumentRepository, 
+            IMapper mapper, 
+            ILogger<UpdateProjectDocumentCommandHandler> logger,
+            IFileUploadOnServerService fileUploadOnServerService)
         {
             _projectRepository = projectRepository;
             _projectDocumentRepository = projectDocumentRepository;
             _mapper = mapper;
             _logger = logger;
+            _fileUploadOnServerService = fileUploadOnServerService;
         }
 
         public async Task<Unit> Handle(UpdateProjectDocumentCommand request, CancellationToken cancellationToken)
@@ -39,6 +47,25 @@ namespace Team.Application.Features.ProjectDocuments.Commands.UpdateProjectDocum
             }
 
             _mapper.Map(request, entityToUpdate, typeof(UpdateProjectDocumentCommand), typeof(ProjectDocument));
+
+            if (request.Document != null)
+            {
+                FileInfo fi = new FileInfo(request.Document.FileName);
+
+                var projectName = entityProject.Id.ToString();
+                var basePath = "documents";
+                var fileName = DateTime.Now.Ticks.ToString();
+                var url = $"/{basePath}/{projectName}/{fileName}{fi.Extension}";
+
+                await _fileUploadOnServerService.UploadFile(
+                    file: request.Document,
+                    baseUrl: basePath,
+                    directoryName: projectName,
+                    fileName: fileName,
+                    fileExtension: fi.Extension);
+
+                entityToUpdate.Url = url;
+            }
 
             await _projectDocumentRepository.UpdateAsync(entityToUpdate);
 

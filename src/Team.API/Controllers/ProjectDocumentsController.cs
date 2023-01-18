@@ -67,7 +67,7 @@ namespace Team.API.Controllers
         /// <returns></returns>
         [HttpPost()]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<ActionResult<Guid>> Create(string projectId, [FromBody] CreateProjectDocumentRequest request)
+        public async Task<ActionResult<Guid>> Create(string projectId, [FromForm] CreateProjectDocumentRequest request)
         {
             var command = new CreateProjectDocumentCommand
             {
@@ -89,7 +89,7 @@ namespace Team.API.Controllers
         [HttpPut()]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult> Update(string projectId, [FromBody] UpdateProjectDocumentRequest request)
+        public async Task<ActionResult> Update(string projectId, [FromForm] UpdateProjectDocumentRequest request)
         {
             var command = new UpdateProjectDocumentCommand
             {
