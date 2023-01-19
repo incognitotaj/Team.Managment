@@ -7,7 +7,6 @@ using System.Text;
 using Team.Application.Contracts.Persistence;
 using Team.Application.Contracts.Services;
 using Team.Domain.Entities.Identity;
-using Team.Infrastructure.Identity;
 using Team.Infrastructure.Repositories;
 using Team.Infrastructure.Services;
 
@@ -26,6 +25,7 @@ namespace Team.Infrastructure
             services.AddScoped<IProjectMilestoneRepository, ProjectMilestoneRepository>();
             services.AddScoped<IProjectDocumentRepository, ProjectDocumentRepository>();
             services.AddScoped<IProjectResourceRepository, ProjectResourceRepository>();
+            services.AddScoped<IProjectResourceDailyTaskRepository, ProjectResourceDailyTaskRepository>();
 
 
             services.AddScoped<IFileUploadOnServerService, FileUploadOnServerService>();

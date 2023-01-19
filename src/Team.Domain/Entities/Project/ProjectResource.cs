@@ -15,6 +15,8 @@ namespace Team.Domain.Entities
             ResourceId = resourceId;
             FromDate = fromDate;
             ToDate = toDate;
+
+            DailyTasks = new HashSet<ProjectResourceDailyTask>();
         }
 
         public Guid ProjectId { get; set; }
@@ -23,6 +25,8 @@ namespace Team.Domain.Entities
         public virtual Resource Resource { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime? ToDate { get; set; }
+
+        public virtual ICollection<ProjectResourceDailyTask> DailyTasks { get; set; }
 
     }
 }

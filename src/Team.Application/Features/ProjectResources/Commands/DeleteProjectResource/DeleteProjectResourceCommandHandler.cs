@@ -35,7 +35,7 @@ namespace Team.Application.Features.ProjectResources.Commands.DeleteProjectResou
             if (entityToDelete == null)
             {
                 _logger.LogError($"Error: Project resource does not exist");
-                throw new NotFoundException(nameof(ProjectClient), request.ProjectResourceId);
+                throw new NotFoundException(nameof(ProjectResource), request.ProjectResourceId);
             }
 
             await _projectResourceRepository.DeleteAsync(entityToDelete);

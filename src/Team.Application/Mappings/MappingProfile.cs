@@ -1,15 +1,19 @@
 ﻿using AutoMapper;
 using Team.Application.Dtos;
+using Team.Application.Features.PrjectResourceDailyTasks.Commands.UpdateProjectResourceDailyTask;
 using Team.Application.Features.ProjectClients.Commands.CreateProjectClient;
 using Team.Application.Features.ProjectClients.Commands.UpdateProjectClient;
 using Team.Application.Features.ProjectDocuments.Commands.CreateProjectDocument;
 using Team.Application.Features.ProjectDocuments.Commands.UpdateProjectDocument;
 using Team.Application.Features.ProjectMilestones.Commands.CreateProjectMilestone;
 using Team.Application.Features.ProjectMilestones.Commands.UpdateProjectMilestone;
+using Team.Application.Features.ProjectResourceDailyTasks.Commands.CreateProjectResourceDailyTask;
 using Team.Application.Features.ProjectResources.Commands.CreateProjectResource;
 using Team.Application.Features.ProjectResources.Commands.UpdateProjectResource;
 using Team.Application.Features.Projects.Commands.CreateProject;
 using Team.Application.Features.Projects.Commands.UpdateProject;
+using Team.Application.Features.ProjectServers.Commands.CreateProjectServer;
+using Team.Application.Features.ProjectServers.Commands.UpdateProjectServer;
 using Team.Application.Features.Resources.Commands.CreateResource;
 using Team.Application.Features.Resources.Commands.UpdateResource;
 using Team.Application.Helpers;
@@ -39,12 +43,16 @@ namespace Team.Application.Mappings
             CreateMap<ProjectClient, UpdateProjectClientCommand>().ReverseMap();
 
             CreateMap<ProjectServer, ProjectServerDto>().ReverseMap();
-            //CreateMap<ProjectServer, CreateProjectServerCommand>().ReverseMap();
-            //CreateMap<ProjectServer, UpdateProjectServerCommand>().ReverseMap();
+            CreateMap<ProjectServer, CreateProjectServerCommand>().ReverseMap();
+            CreateMap<ProjectServer, UpdateProjectServerCommand>().ReverseMap();
 
             CreateMap<ProjectResource, ProjectResourceDto>().ReverseMap();
             CreateMap<ProjectResource, CreateProjectResourceCommand>().ReverseMap();
             CreateMap<ProjectResource, UpdateProjectResourceCommand>().ReverseMap();
+
+            CreateMap<ProjectResourceDailyTask, ProjectResourceDailyTaskDto>().ReverseMap();
+            CreateMap<ProjectResourceDailyTask, CreateProjectResourceDailyTaskCommand>().ReverseMap();
+            CreateMap<ProjectResourceDailyTask, UpdateProjectResourceDailyTaskCommand>().ReverseMap();
 
             CreateMap<ProjectMilestone, ProjectMilestoneDto>().ReverseMap();
             CreateMap<ProjectMilestone, CreateProjectMilestoneCommand>().ReverseMap();

@@ -28,6 +28,8 @@ namespace Team.Infrastructure
             modelBuilder.ApplyConfiguration(new ProjectDocumentConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectMilestoneConfiguration());
 
+            modelBuilder.ApplyConfiguration(new ProjectResourceDailyTaskConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -63,5 +65,6 @@ namespace Team.Infrastructure
         public DbSet<ProjectDocument> ProjectDocuments { get; set; }
         public DbSet<ProjectMilestone> ProjectMilestones { get; set; }
         public DbSet<ProjectResource> ProjectResources { get; set; }
+        public DbSet<ProjectResourceDailyTask> ProjectResourceDailyTasks { get; set; }
     }
 }
