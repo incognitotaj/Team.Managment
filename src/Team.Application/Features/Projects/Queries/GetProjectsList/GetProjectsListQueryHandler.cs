@@ -18,7 +18,9 @@ namespace Team.Application.Features.Projects.Queries.GetProjectsList
 
         public async Task<List<ProjectDto>> Handle(GetProjectsListQuery request, CancellationToken cancellationToken)
         {
-            var resultList = await _projectRepository.GetAllAsync();
+            var resultList = await _projectRepository.GetAsync(
+                predicate: null, orderBy: null, includeString: "Manager", disableTracking: true);
+
             return _mapper.Map<List<ProjectDto>>(resultList);
         }
     }

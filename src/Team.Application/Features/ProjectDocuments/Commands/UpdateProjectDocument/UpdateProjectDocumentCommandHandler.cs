@@ -64,7 +64,7 @@ namespace Team.Application.Features.ProjectDocuments.Commands.UpdateProjectDocum
                     fileName: fileName,
                     fileExtension: fi.Extension);
 
-                entityToUpdate.Url = url;
+                entityToUpdate.FilePath = url;
             }
 
             await _projectDocumentRepository.UpdateAsync(entityToUpdate);

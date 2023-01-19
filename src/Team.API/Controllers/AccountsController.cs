@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Team.API.Requests;
 using Team.Application.Contracts.Services;
 using Team.Application.Dtos;
 using Team.Domain.Entities.Identity;
+using Team.Infrastructure.Extensions;
 
 namespace Team.API.Controllers
 {
@@ -17,26 +19,21 @@ namespace Team.API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public AccountsController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
+        public AccountsController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         [HttpGet("user-info")]
         [Authorize]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
-
-            if (email == null)
-            {
-                return Unauthorized();
-            }
-
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailFromClaimsPrincipalAsync(User);
 
             return Ok(new UserDto
             {
@@ -47,7 +44,19 @@ namespace Team.API.Controllers
             });
         }
 
-        [HttpGet]
+        [HttpGet("user-projects")]
+        [Authorize]
+        public async Task<ActionResult> GetUserProjects()
+        {
+            var userProjects = await _userManager.FindProjectsByEmailFromClaimsPrincipalAsync(User);
+            if (userProjects == null)
+            {
+                return Unauthorized();
+            }
+            var projects = _mapper.Map<IEnumerable<ProjectDto>>(userProjects.Projects);
+
+            return Ok(projects);
+        }
 
 
         [HttpPost("login")]

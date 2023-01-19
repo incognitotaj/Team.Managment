@@ -17,9 +17,9 @@ namespace Team.Application.Helpers
 
         public string Resolve(ProjectDocument source, ProjectDocumentDto destination, string destMember, ResolutionContext context)
         {
-            if (!string.IsNullOrEmpty(source.Url))
+            if (!string.IsNullOrEmpty(source.FilePath))
             {
-                return _config["ApiUrl"] + source.Url;
+                return _config["ApiUrl"] + source.FilePath;
             }
 
             return null;

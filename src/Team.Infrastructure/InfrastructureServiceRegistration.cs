@@ -33,7 +33,7 @@ namespace Team.Infrastructure
 
             var builder = services.AddIdentityCore<AppUser>();
             builder = new IdentityBuilder(builder.UserType, builder.Services);
-            builder.AddEntityFrameworkStores<AppIdentityDbContext>();
+            builder.AddEntityFrameworkStores<DataContext>();
             builder.AddSignInManager<SignInManager<AppUser>>();
 
             services.AddAuthentication();
@@ -46,7 +46,7 @@ namespace Team.Infrastructure
         {
             var builder = services.AddIdentityCore<AppUser>();
             builder = new IdentityBuilder(builder.UserType, builder.Services);
-            builder.AddEntityFrameworkStores<AppIdentityDbContext>();
+            builder.AddEntityFrameworkStores<DataContext>();
             builder.AddSignInManager<SignInManager<AppUser>>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

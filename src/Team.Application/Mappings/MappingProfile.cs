@@ -21,7 +21,12 @@ namespace Team.Application.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<Project, ProjectDto>().ReverseMap();
+            CreateMap<Project, ProjectDto>()
+                .ForMember(dest => dest.ManagerName, opt => opt.MapFrom(p => p.Manager.Name))
+                .ForMember(dest => dest.ManagerEmail, opt => opt.MapFrom(p => p.Manager.Email))
+                .ForMember(dest => dest.ManagerUsername, opt => opt.MapFrom(p => p.Manager.UserName))
+                .ReverseMap();
+
             CreateMap<Project, CreateProjectCommand>().ReverseMap();
             CreateMap<Project, UpdateProjectCommand>().ReverseMap();
 
@@ -42,7 +47,7 @@ namespace Team.Application.Mappings
             CreateMap<ProjectMilestone, UpdateProjectMilestoneCommand>().ReverseMap();
 
             CreateMap<ProjectDocument, ProjectDocumentDto>()
-                .ForMember(dest => dest.Url, opt => opt.MapFrom<ProjectDocumentUrlResolver>())
+                .ForMember(dest => dest.FilePath, opt => opt.MapFrom<ProjectDocumentUrlResolver>())
                 .ReverseMap();
             CreateMap<ProjectDocument, CreateProjectDocumentCommand>().ReverseMap();
             CreateMap<ProjectDocument, UpdateProjectDocumentCommand>().ReverseMap();

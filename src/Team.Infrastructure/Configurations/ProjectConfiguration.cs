@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Team.Domain.Entities;
 
 namespace Team.Infrastructure.Configurations
@@ -41,6 +36,12 @@ namespace Team.Infrastructure.Configurations
                .IsRequired()
                .HasColumnType("DATETIME")
                .HasDefaultValueSql("GETDATE()");
+
+            builder.HasOne(x => x.Manager)
+                .WithMany(x => x.Projects)
+                .HasForeignKey(x => x.ManagerId)
+                .HasConstraintName("FK_Projects_AppUsers")
+                .IsRequired();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Team.Infrastructure.Configurations
                .IsRequired()
                .HasColumnType("NVARCHAR(100)");
 
-            builder.Property(x => x.Url)
+            builder.Property(x => x.FilePath)
                .IsRequired()
                .HasColumnType("NVARCHAR(256)");
 

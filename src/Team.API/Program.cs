@@ -25,16 +25,6 @@ builder.Services.AddDbContext<DataContext>(
     )
 );
 
-builder.Services.AddDbContext<AppIdentityDbContext>(
-    x => x.UseSqlServer(
-        config.GetConnectionString("IdentityConnection"),
-        options =>
-        {
-            //options.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-        }
-    )
-);
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -100,8 +90,8 @@ try
     var context = services.GetRequiredService<DataContext>();
     await context.Database.MigrateAsync();
 
-    var contextIdentity = services.GetRequiredService<AppIdentityDbContext>();
-    await contextIdentity.Database.MigrateAsync();
+    //var contextIdentity = services.GetRequiredService<AppIdentityDbContext>();
+    //await contextIdentity.Database.MigrateAsync();
 
     var userManager = scope.ServiceProvider.GetService<UserManager<AppUser>>();
     await IdentityDataSeeder.SeedAsync(userManager);

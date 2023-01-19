@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team.Domain.Common;
+using Team.Domain.Entities.Identity;
 
 namespace Team.Domain.Entities
 {
@@ -26,6 +27,9 @@ namespace Team.Domain.Entities
         public string Detail { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        public string ManagerId { get; set; }
+        public virtual AppUser Manager { get; set; }
 
         public virtual ICollection<ProjectDocument> ProjectDocuments { get; set; }
         public virtual ICollection<ProjectResource> ProjectResources { get; set; }

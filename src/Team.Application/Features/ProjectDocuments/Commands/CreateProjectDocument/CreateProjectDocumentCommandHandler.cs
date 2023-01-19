@@ -56,7 +56,7 @@ namespace Team.Application.Features.ProjectDocuments.Commands.CreateProjectDocum
                 var entity = new ProjectDocument
                 (
                     title: request.Title,
-                    url: url,
+                    filePath: url,
                     detail: request.Detail,
                     projectId: request.ProjectId
                 );

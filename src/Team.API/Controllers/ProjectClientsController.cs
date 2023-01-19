@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Team.API.Requests;
@@ -14,6 +15,7 @@ namespace Team.API.Controllers
     [Route("api/projects/{projectId}/[controller]")]
     [ApiController]
     [Produces("application/json")]
+    //[Authorize]
     public class ProjectClientsController : ControllerBase
     {
         private readonly IMediator _mediator;
