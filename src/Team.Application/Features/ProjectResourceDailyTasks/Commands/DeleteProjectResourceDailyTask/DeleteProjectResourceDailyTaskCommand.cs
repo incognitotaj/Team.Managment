@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Team.Application.Features.PrjectResourceDailyTasks.Commands.DeleteProjectResourceDailyTask
+namespace Team.Application.Features.ProjectResourceDailyTasks.Commands.DeleteProjectResourceDailyTask
 {
     public class DeleteProjectResourceDailyTaskCommand : IRequest
     {

@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Team.Application.Contracts.Persistence;
 using Team.Application.Exceptions;
-using Team.Application.Features.PrjectResourceDailyTasks.Commands.DeleteProjectResourceDailyTask;
+using Team.Application.Features.ProjectResourceDailyTasks.Commands.DeleteProjectResourceDailyTask;
 using Team.Domain.Entities;
 
 namespace Team.Application.Features.ProjectResourceDailyTasks.Commands.DeleteProjectResourceDailyTask

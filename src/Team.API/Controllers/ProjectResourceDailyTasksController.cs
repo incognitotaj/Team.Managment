@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Team.API.Requests;
 using Team.Application.Dtos;
-using Team.Application.Features.PrjectResourceDailyTasks.Commands.DeleteProjectResourceDailyTask;
-using Team.Application.Features.PrjectResourceDailyTasks.Commands.UpdateProjectResourceDailyTask;
+using Team.Application.Features.ProjectResourceDailyTasks.Commands.DeleteProjectResourceDailyTask;
+using Team.Application.Features.ProjectResourceDailyTasks.Commands.UpdateProjectResourceDailyTask;
 using Team.Application.Features.ProjectResourceDailyTasks.Commands.CreateProjectResourceDailyTask;
 using Team.Application.Features.ProjectResourceDailyTasks.Queries.GetById;
 using Team.Application.Features.ProjectResourceDailyTasks.Queries.GetByProjectResourceId;
@@ -112,7 +112,7 @@ namespace Team.API.Controllers
         /// <param name="projectResourceId"></param>
         /// <param name="projectResourceDailyTaskId"></param>
         /// <returns></returns>
-        [HttpDelete("{projectResourceId}")]
+        [HttpDelete("{projectResourceDailyTaskId}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult> Delete(string projectResourceId, string projectResourceDailyTaskId)

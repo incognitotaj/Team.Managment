@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Team.Application.Features.PrjectResourceDailyTasks.Commands.UpdateProjectResourceDailyTask
+namespace Team.Application.Features.ProjectResourceDailyTasks.Commands.UpdateProjectResourceDailyTask
 {
     public class UpdateProjectResourceDailyTaskCommand : IRequest
     {

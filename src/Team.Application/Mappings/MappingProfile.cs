@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Team.Application.Dtos;
-using Team.Application.Features.PrjectResourceDailyTasks.Commands.UpdateProjectResourceDailyTask;
+using Team.Application.Features.ProjectResourceDailyTasks.Commands.UpdateProjectResourceDailyTask;
 using Team.Application.Features.ProjectClients.Commands.CreateProjectClient;
 using Team.Application.Features.ProjectClients.Commands.UpdateProjectClient;
 using Team.Application.Features.ProjectDocuments.Commands.CreateProjectDocument;
