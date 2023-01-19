@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Team.Application.Contracts.Persistence;
 using Team.Application.Contracts.Services;
 using Team.Domain.Entities.Identity;
@@ -23,7 +27,8 @@ namespace Team.Infrastructure
             services.AddScoped<IProjectResourceRepository, ProjectResourceRepository>();
 
 
-            services.AddTransient<IFileUploadOnServerService, FileUploadOnServerService>();
+            services.AddScoped<IFileUploadOnServerService, FileUploadOnServerService>();
+            services.AddScoped<ITokenService, TokenService>();
 
 
             var builder = services.AddIdentityCore<AppUser>();
@@ -37,14 +42,25 @@ namespace Team.Infrastructure
         }
 
 
-        public static IServiceCollection AddIdentityServices(this IServiceCollection services)
+        public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
             var builder = services.AddIdentityCore<AppUser>();
             builder = new IdentityBuilder(builder.UserType, builder.Services);
             builder.AddEntityFrameworkStores<AppIdentityDbContext>();
             builder.AddSignInManager<SignInManager<AppUser>>();
 
-            services.AddAuthentication();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options=>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"])),
+                        ValidateIssuer = true,
+                        ValidIssuer = config["Token:Issuer"],
+                        ValidateAudience= false,
+                    };
+                });
 
             return services;
         }
