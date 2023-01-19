@@ -15,7 +15,7 @@ namespace Team.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
-    //[Authorize]
+    [Authorize]
     public class ProjectsController : ControllerBase
     {
         private readonly IMediator _mediator;

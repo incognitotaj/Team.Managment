@@ -24,6 +24,7 @@ namespace Team.Infrastructure
             modelBuilder.ApplyConfiguration(new ProjectConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectResourceConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectClientConfiguration());
+            modelBuilder.ApplyConfiguration(new ProjectServerConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectDocumentConfiguration());
             modelBuilder.ApplyConfiguration(new ProjectMilestoneConfiguration());
 
@@ -58,6 +59,7 @@ namespace Team.Infrastructure
         public DbSet<Resource> Resources { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectClient> ProjectClients { get; set; }
+        public DbSet<ProjectServer> ProjectServers { get; set; }
         public DbSet<ProjectDocument> ProjectDocuments { get; set; }
         public DbSet<ProjectMilestone> ProjectMilestones { get; set; }
         public DbSet<ProjectResource> ProjectResources { get; set; }

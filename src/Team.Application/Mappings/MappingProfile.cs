@@ -38,6 +38,10 @@ namespace Team.Application.Mappings
             CreateMap<ProjectClient, CreateProjectClientCommand>().ReverseMap();
             CreateMap<ProjectClient, UpdateProjectClientCommand>().ReverseMap();
 
+            CreateMap<ProjectServer, ProjectServerDto>().ReverseMap();
+            //CreateMap<ProjectServer, CreateProjectServerCommand>().ReverseMap();
+            //CreateMap<ProjectServer, UpdateProjectServerCommand>().ReverseMap();
+
             CreateMap<ProjectResource, ProjectResourceDto>().ReverseMap();
             CreateMap<ProjectResource, CreateProjectResourceCommand>().ReverseMap();
             CreateMap<ProjectResource, UpdateProjectResourceCommand>().ReverseMap();

@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Team.API.Requests;
 using Team.Application.Dtos;
-using Team.Application.Features.ProjectClients.Commands.CreateProjectClient;
-using Team.Application.Features.ProjectClients.Commands.DeleteProjectClient;
-using Team.Application.Features.ProjectClients.Commands.UpdateProjectClient;
-using Team.Application.Features.ProjectClients.Queries.GetById;
-using Team.Application.Features.ProjectClients.Queries.GetByProjectId;
+using Team.Application.Features.ProjectServers.Commands.CreateProjectServer;
+using Team.Application.Features.ProjectServers.Commands.DeleteProjectServer;
+using Team.Application.Features.ProjectServers.Commands.UpdateProjectServer;
+using Team.Application.Features.ProjectServers.Queries.GetById;
+using Team.Application.Features.ProjectServers.Queries.GetByProjectId;
 
 namespace Team.API.Controllers
 {
@@ -16,42 +16,43 @@ namespace Team.API.Controllers
     [ApiController]
     [Produces("application/json")]
     [Authorize]
-    public class ProjectClientsController : ControllerBase
+    public class ProjectServersController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public ProjectClientsController(IMediator mediator)
+        public ProjectServersController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
+
         /// <summary>
-        /// Get specific project client by ID
+        /// Get specific project Server by ID
         /// </summary>
         /// <returns></returns>
-        [HttpGet("{projectClientId}")]
-        [ProducesResponseType(typeof(ProjectClientDto), (int)HttpStatusCode.OK)]
+        [HttpGet("{projectServerId}")]
+        [ProducesResponseType(typeof(ProjectServerDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<ProjectClientDto>> Get(string projectId, string projectClientId)
+        public async Task<ActionResult<ProjectServerDto>> Get(string projectId, string projectServerId)
         {
             var query = new GetByIdQuery()
             {
                 ProjectId = Guid.Parse(projectId),
-                ProjectClientId = Guid.Parse(projectClientId)
+                ProjectServerId = Guid.Parse(projectServerId)
             };
 
             return Ok(await _mediator.Send(query));
         }
 
         /// <summary>
-        /// Get list of all project clients for the specific project
+        /// Get list of all project Servers for the specific project
         /// </summary>
         /// <param name="projectId"></param>
         /// <returns></returns>
         [HttpGet()]
-        [ProducesResponseType(typeof(IEnumerable<ProjectClientDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<ProjectServerDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IEnumerable<ProjectClientDto>>> GetByUser(string projectId)
+        public async Task<ActionResult<IEnumerable<ProjectServerDto>>> GetByUser(string projectId)
         {
             var query = new GetByProjectIdQuery
             {
@@ -61,66 +62,67 @@ namespace Team.API.Controllers
             return Ok(await _mediator.Send(query));
         }
 
-
         /// <summary>
-        /// Creates a new project client for the project
+        /// Creates a new project Server for the project
         /// </summary>
         /// <param name="projectId">Project Id</param>
-        /// <param name="request">Project client data</param>
+        /// <param name="request">Project Server data</param>
         /// <returns></returns>
         [HttpPost()]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<ActionResult<Guid>> Create(string projectId, [FromBody] CreateProjectClientRequest request)
+        public async Task<ActionResult<Guid>> Create(string projectId, [FromBody] CreateProjectServerRequest request)
         {
-            var command = new CreateProjectClientCommand
+            var command = new CreateProjectServerCommand
             {
                 ProjectId = Guid.Parse(projectId),
-                Email = request.Email,
-                Name = request.Name,
-                Phone = request.Phone
+                Password = request.Password,
+                Title = request.Title,
+                Url = request.Url,
+                Username = request.Username
             };
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
         /// <summary>
-        /// Update an existing project client
+        /// Update an existing project Server
         /// </summary>
         /// <param name="projectId">Project ID</param>
-        /// <param name="request">Project client data</param>
+        /// <param name="request">Project Server data</param>
         /// <returns></returns>
         [HttpPut()]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult> Update(string projectId, [FromBody] UpdateProjectClientRequest request)
+        public async Task<ActionResult> Update(string projectId, [FromBody] UpdateProjectServerRequest request)
         {
-            var command = new UpdateProjectClientCommand
+            var command = new UpdateProjectServerCommand
             {
                 ProjectId = Guid.Parse(projectId),
-                ProjectClientId = Guid.Parse(request.ProjectClientId),
-                Email = request.Email,
-                Name = request.Name,
-                Phone = request.Phone
+                ProjectServerId = Guid.Parse(request.ProjectServerId),
+                Password = request.Password,
+                Title = request.Title,
+                Url = request.Url,
+                Username = request.Username
             };
             await _mediator.Send(command);
             return NoContent();
         }
 
         /// <summary>
-        /// Deletes an existing project client
+        /// Deletes an existing project Server
         /// </summary>
         /// <param name="projectId"></param>
-        /// <param name="projectClientId"></param>
+        /// <param name="projectServerId"></param>
         /// <returns></returns>
-        [HttpDelete("{projectClientId}")]
+        [HttpDelete("{projectServerId}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult> Delete(string projectId, string projectClientId)
+        public async Task<ActionResult> Delete(string projectId, string projectServerId)
         {
-            var command = new DeleteProjectClientCommand()
+            var command = new DeleteProjectServerCommand()
             {
                 ProjectId = Guid.Parse(projectId),
-                ProjectClientId = Guid.Parse(projectClientId)
+                ProjectServerId = Guid.Parse(projectServerId)
             };
             await _mediator.Send(command);
             return NoContent();

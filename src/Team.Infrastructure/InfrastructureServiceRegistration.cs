@@ -22,6 +22,7 @@ namespace Team.Infrastructure
             services.AddScoped<IResourceRepository, ResourceRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddScoped<IProjectClientRepository, ProjectClientRepository>();
+            services.AddScoped<IProjectServerRepository, ProjectServerRepository>();
             services.AddScoped<IProjectMilestoneRepository, ProjectMilestoneRepository>();
             services.AddScoped<IProjectDocumentRepository, ProjectDocumentRepository>();
             services.AddScoped<IProjectResourceRepository, ProjectResourceRepository>();

@@ -20,6 +20,7 @@ namespace Team.Domain.Entities
             ProjectDocuments= new HashSet<ProjectDocument>();
             ProjectResources = new HashSet<ProjectResource>();
             ProjectClients = new HashSet<ProjectClient>();
+            ProjectServers = new HashSet<ProjectServer>();
             ProjectMilestones = new HashSet<ProjectMilestone>();
         }
 
@@ -34,6 +35,7 @@ namespace Team.Domain.Entities
         public virtual ICollection<ProjectDocument> ProjectDocuments { get; set; }
         public virtual ICollection<ProjectResource> ProjectResources { get; set; }
         public virtual ICollection<ProjectClient> ProjectClients { get; set; }
+        public virtual ICollection<ProjectServer> ProjectServers { get; set; }
         public virtual ICollection<ProjectMilestone> ProjectMilestones { get; set; }
     }
 }
