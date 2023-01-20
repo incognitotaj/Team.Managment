@@ -52,7 +52,7 @@ namespace Team.API.Controllers
         [HttpGet()]
         [ProducesResponseType(typeof(IEnumerable<ProjectServerDto>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IEnumerable<ProjectServerDto>>> GetByUser(string projectId)
+        public async Task<ActionResult<IEnumerable<ProjectServerDto>>> GetByProject(string projectId)
         {
             var query = new GetByProjectIdQuery
             {
