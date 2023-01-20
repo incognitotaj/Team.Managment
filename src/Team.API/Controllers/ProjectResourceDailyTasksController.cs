@@ -12,7 +12,7 @@ using Team.Application.Features.ProjectResourceDailyTasks.Queries.GetByProjectRe
 
 namespace Team.API.Controllers
 {
-    [Route("api/projects/{projectResourceId}/[controller]")]
+    [Route("api/projectResources/{projectResourceId}/[controller]")]
     [ApiController]
     [Produces("application/json")]
     [Authorize]
